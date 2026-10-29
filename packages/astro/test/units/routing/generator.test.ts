@@ -178,6 +178,22 @@ describe('routing - generator', () => {
 		assert.throws(() => generator({}), TypeError);
 	});
 
+	it('should not throw when called without arguments for a static route', () => {
+		const generator = getRouteGenerator(
+			[[{ spread: false, content: 'about', dynamic: false }]],
+			'never',
+		);
+		assert.equal(generator(), '/about');
+	});
+
+	it('should not throw when called with null for a static route', () => {
+		const generator = getRouteGenerator(
+			[[{ spread: false, content: 'about', dynamic: false }]],
+			'never',
+		);
+		assert.equal(generator(null), '/about');
+	});
+
 	it('should not throw when a dynamic parameter is 0', () => {
 		const generator = getRouteGenerator(
 			[[{ spread: false, content: 'foo', dynamic: true }]],
